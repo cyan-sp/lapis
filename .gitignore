@@ -1,0 +1,8 @@
+# Emacs
+\#*\#
+.\#*
+
+# Lapis generated
+nginx.conf.compiled
+logs/*
+!logs/.gitkeep
