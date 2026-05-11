@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= page_title or "Lapis" %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <style>
+    body { font-family: 'Dosis', sans-serif; margin: 0; }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #f0fafa;
+      border-bottom: 1px solid #b2e0e0;
+    }
+    nav .brand {
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #0e8080;
+      margin-right: auto;
+    }
+    main { padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/">Lapis</a>
+    <sl-button variant="text" href="/">Home</sl-button>
+    <sl-button variant="text" href="/about">About</sl-button>
+  </nav>
+  <main>
+    <%- content_for("inner") %>
+  </main>
+</body>
+</html>
