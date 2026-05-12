@@ -33,7 +33,6 @@
   <nav>
     <a class="brand" href="/">Lapis</a>
     <sl-button variant="text" href="/">Home</sl-button>
-    <sl-button variant="text" href="/about">About</sl-button>
   </nav>
   <main>
     <%- content_for("inner") %>

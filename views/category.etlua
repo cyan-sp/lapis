@@ -1,0 +1,21 @@
+<style>
+  .post-card { max-width: 300px; margin: 1rem; display: inline-block; vertical-align: top; }
+  .post-card small { color: var(--sl-color-neutral-500); }
+  .post-card [slot='footer'] { display: flex; justify-content: space-between; align-items: center; }
+</style>
+
+<h2><%= category.name %></h2>
+
+<% for _, post in ipairs(posts) do %>
+  <sl-card class="post-card">
+    <% if post.image_url ~= '' then %>
+    <img slot="image" src="<%= post.image_url %>" alt="<%= post.title %>" />
+    <% end %>
+    <strong><%= post.title %></strong><br />
+    <%= post.body %><br />
+    <small><%= post.created_at %></small>
+    <div slot="footer">
+      <sl-button variant="primary" pill>Read more</sl-button>
+    </div>
+  </sl-card>
+<% end %>

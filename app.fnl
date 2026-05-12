@@ -1,5 +1,5 @@
 (local lapis (require :lapis))
-(local {: respond_to} (require :lapis.application))
+(local db (require :lapis.db))
 (require :lapis.features.etlua)
 
 (local app (lapis.Application))
@@ -8,17 +8,11 @@
 (app:get "/" (fn [self]
   {:render :index}))
 
-(app:get "/greet/:name" (fn [self]
-  {:render false
-   :json {:message (.. "Hello, " self.params.name "!")}}))
-
-(app:match "/form" (respond_to
-  {:GET  (fn [self] "
-    <form method='POST' action='/form'>
-      <input name='msg' placeholder='message' />
-      <button>Send</button>
-    </form>")
-   :POST (fn [self]
-     (.. "You said: " self.params.msg))}))
+(app:get "/categories/:slug" (fn [self]
+  (let [category (. (db.query "SELECT * FROM categories WHERE slug = ?" self.params.slug) 1)
+        posts    (db.query "SELECT * FROM posts WHERE category_id = ?" category.id)]
+    (set self.category category)
+    (set self.posts posts))
+  {:render :category}))
 
 app
