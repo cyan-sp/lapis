@@ -4,7 +4,10 @@
   .post-card [slot='footer'] { display: flex; justify-content: space-between; align-items: center; }
 </style>
 
-<h2><%= category.name %></h2>
+<% local view = require("fennel").view %>
+<% local lume = require("lume") %>
+
+<h2><%= category.name %> <span style="font-weight: normal"><%= now %></span></h2>
 
 <% for _, post in ipairs(posts) do %>
   <sl-card class="post-card">
@@ -19,3 +22,14 @@
     </div>
   </sl-card>
 <% end %>
+
+<p>
+<% for month, days in pairs(calendar) do %>
+<p> <%= month %> </p>
+  <% for _, day in ipairs(lume.slice(days, 1, 10)) do %>
+  <sl-tag size="small"><%= day.date %></sl-tag>
+  <% end %>
+<% end %>
+</p>
+
+

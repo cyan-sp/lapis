@@ -1,7 +1,9 @@
 (local lapis (require :lapis))
-(local db (require :lapis.db))
+(local Categories (require :models.categories))
+(local Posts (require :models.posts))
+(local {: calendar} (require :calendar))
 (require :lapis.features.etlua)
-
+;; (local db (require :lapis.db))
 (local app (lapis.Application))
 (set app.layout (require :views.layout))
 
@@ -9,10 +11,14 @@
   {:render :index}))
 
 (app:get "/categories/:slug" (fn [self]
-  (let [category (. (db.query "SELECT * FROM categories WHERE slug = ?" self.params.slug) 1)
-        posts    (db.query "SELECT * FROM posts WHERE category_id = ?" category.id)]
+  (let [category (Categories:find {:slug self.params.slug})
+        posts    (Posts:select "WHERE category_id = ?" category.id)
+        now (os.date "%Y-%m-%d" (os.time))        
+        calendar (calendar 1 2)]
     (set self.category category)
-    (set self.posts posts))
+    (set self.posts posts)
+    (set self.now now)
+    (set self.calendar calendar))
   {:render :category}))
 
 app
