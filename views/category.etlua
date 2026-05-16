@@ -2,24 +2,24 @@
 <% local lume = require("lume") %>
 
 <div class="container">
+  <!-- posts section -->
   <div class="container-main">
-<% for _, post in ipairs(posts) do %>
-  <sl-card class="post-card">
-    <% if post.image_url ~= '' then %>
-    <img slot="image" src="<%= post.image_url %>" alt="<%= post.title %>" />
+    <% for _, post in ipairs(posts) do %>
+      <sl-card class="post-card">
+        <% if post.image_url ~= '' then %>
+          <img slot="image" src="<%= post.image_url %>" alt="<%= post.title %>" />
+        <% end %>
+        <strong><%= post.title %></strong><br />
+        <%= post.body %><br />
+        <small><%= post.created_at %></small>
+        <div slot="footer">
+          <sl-button variant="primary" pill>Read more</sl-button>
+        </div>
+      </sl-card>
     <% end %>
-    <strong><%= post.title %></strong><br />
-    <%= post.body %><br />
-    <small><%= post.created_at %></small>
-    <div slot="footer">
-      <sl-button variant="primary" pill>Read more</sl-button>
-    </div>
-  </sl-card>
-<% end %>
   </div>
 
-<!-- calendar  section -->
-
+  <!-- calendar section -->
   <div class="container-calendar">
     <% for month, days in pairs(calendar) do %>
       <p><%= month %></p>
@@ -29,10 +29,4 @@
     <% end %>
     <sl-button size="small" variant="primary" style="margin-top: 1rem">New post</sl-button>
   </div>
-
 </div>
-<!-- end of sections  -->
-
-
-
-
