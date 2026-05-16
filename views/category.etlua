@@ -1,14 +1,8 @@
-<style>
-  .post-card { max-width: 300px; margin: 1rem; display: inline-block; vertical-align: top; }
-  .post-card small { color: var(--sl-color-neutral-500); }
-  .post-card [slot='footer'] { display: flex; justify-content: space-between; align-items: center; }
-</style>
-
 <% local view = require("fennel").view %>
 <% local lume = require("lume") %>
 
-<h2><%= category.name %> <span style="font-weight: normal"><%= now %></span></h2>
-
+<div class="container">
+  <div class="container-main">
 <% for _, post in ipairs(posts) do %>
   <sl-card class="post-card">
     <% if post.image_url ~= '' then %>
@@ -22,14 +16,23 @@
     </div>
   </sl-card>
 <% end %>
+  </div>
 
-<p>
-<% for month, days in pairs(calendar) do %>
-<p> <%= month %> </p>
-  <% for _, day in ipairs(lume.slice(days, 1, 10)) do %>
-  <sl-tag size="small"><%= day.date %></sl-tag>
-  <% end %>
-<% end %>
-</p>
+<!-- calendar  section -->
+
+  <div class="container-calendar">
+    <% for month, days in pairs(calendar) do %>
+      <p><%= month %></p>
+      <% for _, day in ipairs(lume.slice(days, 1, 10)) do %>
+        <sl-tag size="small"><%= day.date %></sl-tag>
+      <% end %>
+    <% end %>
+    <sl-button size="small" variant="primary" style="margin-top: 1rem">New post</sl-button>
+  </div>
+
+</div>
+<!-- end of sections  -->
+
+
 
 

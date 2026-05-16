@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="/static/app.css?v=2" />
   <style>
     body { font-family: 'Dosis', sans-serif; margin: 0; }
     nav {
