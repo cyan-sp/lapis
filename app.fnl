@@ -21,4 +21,14 @@
     (set self.calendar calendar))
   {:render :category}))
 
+(app:post "/post/create" (fn [self]
+  (Posts:create {:title       self.params.title
+                 :body        self.params.body
+                 :image_url   ""
+                 :category_id self.params.category_id
+                 :created_at  (os.date "!%Y-%m-%d %H:%M:%S")
+                 :updated_at  (os.date "!%Y-%m-%d %H:%M:%S")})
+  {:redirect_to (.. "/categories/" (. (Categories:find self.params.category_id) :slug))}  
+  ))
+
 app

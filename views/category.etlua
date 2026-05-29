@@ -1,5 +1,7 @@
 <% local view = require("fennel").view %>
 <% local lume = require("lume") %>
+<% local utils = require("utils") %>
+
 
 <div class="container">
   <!-- posts section -->
@@ -23,10 +25,28 @@
   <div class="container-calendar">
     <% for month, days in pairs(calendar) do %>
       <p><%= month %></p>
-      <% for _, day in ipairs(lume.slice(days, 1, 10)) do %>
-        <sl-tag size="small"><%= day.date %></sl-tag>
+      <% for _, day in ipairs(days) do %>
+        <% local date = utils["split-str"](day.date, "-") %>
+        <sl-tag size="small"><%= date[3] %></sl-tag>
       <% end %>
     <% end %>
-    <sl-button size="small" variant="primary" style="margin-top: 1rem">New post</sl-button>
+    <br/>
+    <sl-button size="small" variant="primary" style="margin-top: 1rem"
+      onclick="document.querySelector('#new-post-dialog').show()">
+      New post
+    </sl-button>
   </div>
 </div>
+
+<sl-dialog id="new-post-dialog" label="New post">
+  <form method="post" action="/post/create">
+    <input type="hidden" name="category_id" value="<%= category.id %>" />
+    <sl-input name="title" label="Title" style="margin-bottom: 1rem"></sl-input>
+    <sl-textarea name="body" label="Body" rows="4"></sl-textarea>
+    <sl-button slot="footer" variant="primary" type="submit">Save</sl-button>
+    <sl-button slot="footer" variant="neutral" type="button"
+      onclick="document.querySelector('#new-post-dialog').hide()">
+      Cancel
+    </sl-button>
+  </form>
+</sl-dialog>
